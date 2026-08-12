@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/Input";
+import { useAuthContext } from "../../../shared/hook/UseContextData";
+import { nanoid } from "nanoid";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,11 +21,15 @@ const RegisterPage = () => {
 
   const password = watch("password");
 
+  let { registeredAmin, setRegisteredAmin } = useAuthContext();
+
+
   const handleRegisterFormSubmit = (data) => {
     console.log(data);
+    setRegisteredAmin([...registeredAmin, {...data,  id:nanoid()}]);
 
     // Later:
-    // localStorage.setItem("user", JSON.stringify(data));
+    // localStorage.setItem("user", JSON.stringif y(data));
 
     reset();
   };
