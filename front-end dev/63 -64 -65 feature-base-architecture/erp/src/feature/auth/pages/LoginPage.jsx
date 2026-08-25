@@ -1,35 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/Input";
+import { useAuth } from "../hooks/UseAuth";
+
+
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+let {register, handleLoginFormSubmit,errors, handleSubmit, navigate} = useAuth();
 
-  const handleLoginFormSubmit = (data) => {
-    console.log(data);
 
-    // Login logic later
-    // localStorage.setItem("user", JSON.stringify(data));
 
-    reset();
-  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 flex items-center justify-center px-4">
-
       {/* Liquid Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
         {/* Blue Blob */}
         <div
           className="
@@ -78,10 +65,8 @@ const LoginPage = () => {
 
       {/* Login Container */}
       <div className="relative z-10 w-full max-w-md">
-
         {/* Logo */}
         <div className="text-center mb-7">
-
           <div
             className="
               inline-flex
@@ -104,9 +89,7 @@ const LoginPage = () => {
             E
           </div>
 
-          <h1 className="text-3xl font-bold text-white">
-            Welcome Back
-          </h1>
+          <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
 
           <p className="mt-2 text-sm text-slate-400">
             Login to your ERP account
@@ -128,7 +111,6 @@ const LoginPage = () => {
             sm:p-8
           "
         >
-
           {/* Glass Highlight */}
           <div
             className="
@@ -147,7 +129,6 @@ const LoginPage = () => {
             onSubmit={handleSubmit(handleLoginFormSubmit)}
             className="relative z-10 space-y-5"
           >
-
             {/* Email */}
             <Input
               register={register}
@@ -167,7 +148,6 @@ const LoginPage = () => {
 
             {/* Password */}
             <div className="relative">
-
               <Input
                 register={register}
                 name="password"
@@ -204,7 +184,6 @@ const LoginPage = () => {
 
             {/* Remember + Forgot */}
             <div className="flex items-center justify-between text-sm">
-
               <label className="flex items-center gap-2 text-slate-400 cursor-pointer">
                 <input
                   type="checkbox"
@@ -217,7 +196,6 @@ const LoginPage = () => {
                     accent-cyan-500
                   "
                 />
-
                 Remember me
               </label>
 
@@ -257,7 +235,6 @@ const LoginPage = () => {
                 hover:shadow-cyan-500/30
               "
             >
-
               {/* Shine Animation */}
               <span
                 className="
@@ -272,17 +249,13 @@ const LoginPage = () => {
                 "
               />
 
-              <span className="relative">
-                Login
-              </span>
+              <span className="relative">Login</span>
             </button>
           </form>
 
           {/* Register */}
           <p className="relative z-10 text-center text-sm text-slate-400 mt-6">
-
             Don't have an account?{" "}
-
             <button
               type="button"
               onClick={() => navigate("/register")}
@@ -295,7 +268,6 @@ const LoginPage = () => {
             >
               Create account
             </button>
-
           </p>
         </div>
 

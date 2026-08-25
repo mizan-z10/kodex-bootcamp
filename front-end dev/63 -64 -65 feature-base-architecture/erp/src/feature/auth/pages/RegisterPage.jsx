@@ -1,45 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { useForm } from "react-hook-form";
 import Input from "../../../shared/components/Input";
-import { useAuthContext } from "../../../shared/hook/UseContextData";
-import { nanoid } from "nanoid";
+import { useAuth } from "../hooks/UseAuth";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const navigate = useNavigate();
-
-  const {
+  let {
     register,
+    handleRegisterFormSubmit,
+    errors,
     handleSubmit,
     watch,
-    reset,
-    formState: { errors },
-  } = useForm();
+    navigate,
+  } = useAuth();
 
   const password = watch("password");
 
-  let { registeredAmin, setRegisteredAmin } = useAuthContext();
-
-
-  const handleRegisterFormSubmit = (data) => {
-    console.log(data);
-    setRegisteredAmin([...registeredAmin, {...data,  id:nanoid()}]);
-
-    // Later:
-    // localStorage.setItem("user", JSON.stringif y(data));
-
-    reset();
-  };
-
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 flex items-center justify-center px-4 py-10">
-
       {/* Liquid Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-
         <div
           className="
             absolute -top-32 -left-32
@@ -76,10 +57,8 @@ const RegisterPage = () => {
 
       {/* Main Container */}
       <div className="relative z-10 w-full max-w-lg">
-
         {/* Brand */}
         <div className="text-center mb-7">
-
           <div
             className="
               inline-flex items-center justify-center
@@ -95,9 +74,7 @@ const RegisterPage = () => {
             E
           </div>
 
-          <h1 className="text-3xl font-bold text-white">
-            Create Account
-          </h1>
+          <h1 className="text-3xl font-bold text-white">Create Account</h1>
 
           <p className="mt-2 text-sm text-slate-400">
             Create your ERP account to get started
@@ -117,7 +94,6 @@ const RegisterPage = () => {
             overflow-hidden
           "
         >
-
           {/* Glass shine */}
           <div
             className="
@@ -133,7 +109,6 @@ const RegisterPage = () => {
             onSubmit={handleSubmit(handleRegisterFormSubmit)}
             className="relative z-10 space-y-5"
           >
-
             {/* Name */}
             <Input
               register={register}
@@ -236,9 +211,7 @@ const RegisterPage = () => {
 
               <button
                 type="button"
-                onClick={() =>
-                  setShowConfirmPassword(!showConfirmPassword)
-                }
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="
                   absolute right-3 top-9
                   text-xs font-medium
@@ -256,6 +229,7 @@ const RegisterPage = () => {
               <input
                 type="checkbox"
                 className="mt-1 w-4 h-4 rounded border-slate-600"
+                required
               />
 
               <span>
@@ -301,9 +275,7 @@ const RegisterPage = () => {
                 "
               />
 
-              <span className="relative">
-                Create Account
-              </span>
+              <span className="relative">Create Account</span>
             </button>
           </form>
 

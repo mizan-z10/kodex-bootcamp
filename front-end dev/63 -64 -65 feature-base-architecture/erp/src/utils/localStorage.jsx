@@ -1,7 +1,8 @@
-let Storage =  {
+
+export let Storage =  {
     set: (key, val) => {
-        let data = localStorage.setItem(key, JSON.stringify(val));
-        return data;
+        localStorage.setItem(key, JSON.stringify(val));
+        
     },
     get:(key)=>{
         let data = localStorage.getItem(key);
